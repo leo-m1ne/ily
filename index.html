@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>my love</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ffdde1, #edaeb6);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .envelope {
+        position: relative;
+        width: 320px;
+        height: 200px;
+        background: #fff6f3;
+        cursor: pointer;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease;
+        z-index: 1;
+    }
+
+    .envelope:hover {
+        transform: scale(1.03);
+    }
+
+    .envelope::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 100%;
+        left: 0;
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 100px solid #fff6f3;
+        filter: drop-shadow(0 4px 3px rgba(0,0,0,0.25));
+    }
+
+    .heart {
+        position: absolute;
+        top: 49%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.2rem;
+        color: rgb(254, 209, 209);
+        z-index: 2;
+        pointer-events: none;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .letter {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 320px;
+        min-height: 250px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        text-align: left;
+        z-index: 5;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.8s ease, transform 1s ease;
+    }
+
+    .show .letter {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .letter p {
+        margin: 0;
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .hint {
+        margin-top: 10px;
+        font-size: 0.85rem;
+        color: rgba(0,0,0,0.4);
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+    <div class="envelope" onclick="openLetter()">
+        <div class="heart">❤</div>
+        <div class="letter">
+            <p id="letterText"></p>
+        </div>
+    </div>
+    <div class="hint">tap me!</div>
+
+<script>
+    const pages = [
+        "mi precioso amor. ♡ <br> nunca me imaginé que alguien pudiera hacerme sentir así. entraste a mi mundo con tanta suavidad, pero al mismo tiempo con tanta fuerza. te metiste dentro de mi alma y sanaste todas mis heridas. cuando estoy en tus brazos todo se calma, el mundo se vuelve silencioso y todo lo que puedo escuchar es el latido de tu corazón, mi melodía favorita. es ahí, entre tus latidos y los míos, que entiendo que cada momento contigo es el más precioso de los regalos, que tú eres mi persona. aquella con la que quiero compartir mi vida todo el tiempo que se nos permita.",
+        "mi lindo hombrecito, hoy estamos cumpliendo tres mesesitos juntos, ¿no te parece increíble? todo el tiempo a tu lado ha sido tan increíble, estar contigo me llena de felicidad. eres verdaderamente un sueño, todo lo que siempre busqué en una relación lo tengo contigo. <br><br>te amo infinitamente, mi dulce amor, espero que celebremos muchísimos meses más juntos. ♡♡♡"
+    ];
+
+    let currentPage = 0;
+    const letterText = document.getElementById("letterText");
+    const envelope = document.querySelector(".envelope");
+
+    function openLetter() {
+        if (!envelope.classList.contains("show")) {
+            envelope.classList.add("show");
+            currentPage = 0;
+            letterText.innerHTML = pages[currentPage];
+        } else {
+            currentPage++;
+            if (currentPage < pages.length) {
+                letterText.innerHTML = pages[currentPage];
+            } else {
+                envelope.classList.remove("show");
+                currentPage = 0;
+            }
+        }
+    }
+</script>
+</body>
+</html>
